@@ -71,8 +71,13 @@ export function SearchFilterBar({
           <option value="">All Categories</option>
           {categories.map((cat, idx) => {
             // Handle both object and string formats defensively
-            const value = typeof cat === 'string' ? cat : (cat as any).slug;
-            const label = typeof cat === 'string' ? cat.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase()) : (cat as any).name;
+            const isString = typeof cat === 'string';
+            const catAny = cat as any;
+            const value = isString ? catAny : catAny.slug;
+            const label = isString 
+              ? String(catAny).replace(/-/g, ' ').replace(/\b\w/g, (l: string) => l.toUpperCase()) 
+              : catAny.name;
+              
             return (
               <option key={value || idx} value={value}>
                 {label}
