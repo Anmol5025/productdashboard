@@ -11,8 +11,9 @@ import { Product } from '@/types';
 import { Plus } from 'lucide-react';
 import { ProductFormModal } from '@/components/ProductFormModal';
 import { ConfirmDeleteModal } from '@/components/ConfirmDeleteModal';
+import { Suspense } from 'react';
 
-export default function ProductsPage() {
+function ProductsContent() {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -178,5 +179,13 @@ export default function ProductsPage() {
         productTitle={selectedProduct?.title || ''}
       />
     </div>
+  );
+}
+
+export default function ProductsPage() {
+  return (
+    <Suspense fallback={<div className="flex justify-center items-center h-64"><div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div></div>}>
+      <ProductsContent />
+    </Suspense>
   );
 }
