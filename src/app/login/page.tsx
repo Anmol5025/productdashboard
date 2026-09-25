@@ -7,8 +7,8 @@ import { login } from '@/api/auth';
 import { LogIn } from 'lucide-react';
 
 export default function LoginPage() {
-  const [username, setUsername] = useState('emilys');
-  const [password, setPassword] = useState('emilyspass');
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
